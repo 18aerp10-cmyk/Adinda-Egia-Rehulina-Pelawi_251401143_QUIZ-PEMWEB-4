@@ -3,9 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, Trash2 } from "lucide-react";
 
-import Modal from "../components/AddTodoModal";
-import TodoForm from "../components/TodoForm";
-import ConfirmDialog from "../components/ConfirmDeleteModal";
+import AddTodoModal from "../components/AddTodoModal";
+import ConfirmDeleteModal from "../components/ConfirmDeleteModal";
 
 export default function TodoList({ todos, addTodo, deleteTodo }) {
   const navigate = useNavigate();
@@ -21,6 +20,7 @@ export default function TodoList({ todos, addTodo, deleteTodo }) {
         </h1>
 
         <button
+          type="button"
           onClick={() => setShowAdd(true)}
           className="rounded bg-pink-500 px-3 py-1.5 text-sm text-white hover:bg-pink-600"
         >
@@ -50,6 +50,7 @@ export default function TodoList({ todos, addTodo, deleteTodo }) {
               <td className="px-3 py-3">
                 <div className="flex justify-center gap-2">
                   <button
+                    type="button"
                     onClick={() => navigate(`/todo/${t.id}`)}
                     className="rounded bg-pink-500 p-1.5 text-white hover:bg-pink-600"
                   >
@@ -57,6 +58,7 @@ export default function TodoList({ todos, addTodo, deleteTodo }) {
                   </button>
 
                   <button
+                    type="button"
                     onClick={() => setToDelete(t)}
                     className="rounded bg-sky-500 p-1.5 text-white hover:bg-sky-600"
                   >
@@ -76,26 +78,20 @@ export default function TodoList({ todos, addTodo, deleteTodo }) {
       )}
 
       {showAdd && (
-        <Modal
-          title="Tambah Todo"
+        <AddTodoModal
+          description="Tambah Todo"
           onClose={() => setShowAdd(false)}
-        >
-          <TodoForm
-            submitLabel="Tambah"
-            onCancel={() => setShowAdd(false)}
-            onSubmit={(data) => {
-              addTodo(data);
-              setShowAdd(false);
-            }}
-          />
-        </Modal>
+          onSubmit={(data) => {
+            addTodo(data);
+          }}
+        />
       )}
 
       {toDelete && (
-        <ConfirmDialog
+        <ConfirmDeleteModal
           message={`Hapus tugas "${toDelete.title}"? Tindakan ini tidak dapat dibatalkan.`}
-          onCancel={() => setToDelete(null)}
-          onConfirm={() => {
+          onClose={() => setToDelete(null)}
+          onContinue={() => {
             deleteTodo(toDelete.id);
             setToDelete(null);
           }}

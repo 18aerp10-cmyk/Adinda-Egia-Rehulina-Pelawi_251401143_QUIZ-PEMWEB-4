@@ -1,16 +1,54 @@
-# React + Vite
+# Todo List Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+## Deskripsi Aplikasi
 
-Currently, two official plugins are available:
+Todo List merupakan aplikasi frontend berbasis React.js yang digunakan untuk membantu pengguna dalam mengelola daftar tugas. Aplikasi ini memungkinkan pengguna untuk menambahkan, melihat, memperbarui, dan menghapus tugas dengan tampilan yang sederhana dan mudah digunakan.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Fitur Aplikasi
 
-## React Compiler
+Aplikasi ini memiliki beberapa fitur utama:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. **Menampilkan Daftar Tugas**  
+   Menampilkan seluruh daftar tugas beserta informasi status, prioritas, dan deadline.
 
-## Expanding the Oxlint configuration
+2. **Melihat Detail Tugas**  
+   Menampilkan informasi lengkap dari tugas yang dipilih.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+3. **Menambahkan Tugas**  
+   Memungkinkan pengguna menambahkan tugas baru melalui form.
+
+4. **Memperbarui Tugas**  
+   Memungkinkan pengguna mengubah informasi tugas yang sudah ada.
+
+5. **Menghapus Tugas**  
+   Memungkinkan pengguna menghapus tugas dengan konfirmasi sebelum penghapusan.
+
+## Struktur Data
+
+Setiap tugas memiliki beberapa atribut:
+
+| Atribut | Keterangan |
+|---|---|
+| id | Identitas unik tugas |
+| title | Judul tugas |
+| description | Deskripsi tugas |
+| priority | Prioritas tugas |
+| deadline | Batas waktu pengerjaan |
+| status | Status pengerjaan tugas |
+
+## Screenshot Aplikasi
+
+### 1. Menampilkan Daftar Tugas
+![Todo List](screenshots/todo-list.png)
+
+### 2. Melihat Detail Tugas
+![Detail Todo](screenshots/todo-detail.png)
+
+### 3. Menambahkan Tugas
+![Tambah Todo](screenshots/tambah-todo.png)
+
+### 4. Memperbarui Tugas
+![Edit Todo](screenshots/edit-todo.png)
+
+### 5. Menghapus Tugas
+![Hapus Todo](screenshots/hapus-todo.png)

@@ -1,12 +1,13 @@
+
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Modal from "../components/AddTodoModal";
-import TodoForm from "../components/TodoForm";
+import AddTodoModal from "../components/AddTodoModal";
 
 export default function TodoDetail({ todos, updateTodo }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const [showEdit, setShowEdit] = useState(false);
+
   const todo = todos.find((t) => t.id === Number(id));
 
   if (!todo) {
@@ -29,6 +30,7 @@ export default function TodoDetail({ todos, updateTodo }) {
         <div>
           <h2 className="font-bold text-pink-600">Judul</h2>
           <p className="mb-3">{todo.title}</p>
+
           <h2 className="font-bold text-pink-600">Deskripsi</h2>
           <div className="min-h-24 rounded border border-pink-200 p-2">
             {todo.description}
@@ -38,8 +40,10 @@ export default function TodoDetail({ todos, updateTodo }) {
         <div>
           <h2 className="font-bold text-pink-600">Status</h2>
           <p className="mb-2">{todo.status}</p>
+
           <h2 className="font-bold text-pink-600">Prioritas</h2>
           <p className="mb-2">{todo.priority}</p>
+
           <h2 className="font-bold text-pink-600">Deadline</h2>
           <p className="mb-3">{todo.deadline}</p>
 
@@ -50,6 +54,7 @@ export default function TodoDetail({ todos, updateTodo }) {
             >
               Kembali
             </button>
+
             <button
               onClick={() => setShowEdit(true)}
               className="rounded bg-pink-500 px-3 py-1.5 text-white hover:bg-pink-600"
@@ -61,17 +66,14 @@ export default function TodoDetail({ todos, updateTodo }) {
       </div>
 
       {showEdit && (
-        <Modal title="Update Todo" onClose={() => setShowEdit(false)}>
-          <TodoForm
-            initial={todo}
-            submitLabel="Update"
-            onCancel={() => setShowEdit(false)}
-            onSubmit={(data) => {
-              updateTodo(todo.id, data);
-              setShowEdit(false);
-            }}
-          />
-        </Modal>
+        <AddTodoModal
+          description="Update Todo"
+          todoData={todo}
+          onClose={() => setShowEdit(false)}
+          onSubmit={(data) => {
+            updateTodo(todo.id, data);
+          }}
+        />
       )}
     </main>
   );

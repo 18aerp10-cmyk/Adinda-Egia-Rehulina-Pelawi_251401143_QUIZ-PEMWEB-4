@@ -15,18 +15,24 @@ function App() {
   function notify(message) {
     clearTimeout(timer.current);
     setToast({ message });
-    timer.current = setTimeout(() => setToast(null), 2500);
+
+    timer.current = setTimeout(() => {
+      setToast(null);
+    }, 2500);
   }
 
+  // Menambahkan tugas baru
   function handleAdd(data) {
     const id = todos.length
       ? Math.max(...todos.map((todo) => todo.id)) + 1
       : 1;
 
     setTodos((prev) => [...prev, { ...data, id }]);
+
     notify("Tugas berhasil ditambahkan");
   }
 
+  // Memperbarui tugas
   function handleUpdate(id, data) {
     setTodos((prev) =>
       prev.map((todo) =>
@@ -37,14 +43,19 @@ function App() {
     notify("Tugas berhasil diperbarui");
   }
 
+  // Menghapus tugas
   function handleDelete(id) {
-    setTodos((prev) => prev.filter((todo) => todo.id !== id));
+    setTodos((prev) =>
+      prev.filter((todo) => todo.id !== id)
+    );
+
     notify("Tugas berhasil dihapus");
   }
 
   return (
     <BrowserRouter>
       <Routes>
+        {/* Halaman daftar tugas */}
         <Route
           path="/"
           element={
@@ -56,22 +67,25 @@ function App() {
           }
         />
 
+        {/* Halaman detail dan update tugas */}
         <Route
           path="/todo/:id"
           element={
             <TodoDetailPage
               todos={todos}
-              onUpdate={handleUpdate}
+              updateTodo={handleUpdate}
             />
           }
         />
 
+        {/* Halaman jika alamat tidak ditemukan */}
         <Route
           path="*"
           element={<h1>Halaman tidak ditemukan</h1>}
         />
       </Routes>
 
+      {/* Notifikasi */}
       <Toast toast={toast} />
     </BrowserRouter>
   );
